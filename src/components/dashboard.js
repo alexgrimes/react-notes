@@ -5,7 +5,7 @@ import { Route } from "react-router-dom";
 import { Typography, Button } from '@material-ui/core';
 
 import NotesContainer from "./NotesContainer";
-import NavBar from "./NavBar";
+import Nav from "./NewForm";
 import NewForm from "./NewForm";
 import EditForm from "./EditForm";
 import { fetchNotes } from "../actions/fetchNotes";
@@ -17,7 +17,7 @@ class Dashboard extends Component {
   
   handleLogoutClick = () => {
     axios
-      .delete("http://localhost:3001/logout", { withCredentials: true })
+      .delete("http://localhost:3000/logout", { withCredentials: true })
       .then((response) => {
         this.props.handleLogout();
         this.props.history.push("/login");
@@ -29,7 +29,7 @@ class Dashboard extends Component {
   componentDidMount() {
     if (this.props.user.id) {
       const userId = this.props.user.id;
-      const API = `http://localhost:3001/users/${userId}/notes`;
+      const API = `http://localhost:3000/users/${userId}/notes`;
 
       fetch(API)
         .then((response) => response.json())
@@ -42,7 +42,7 @@ class Dashboard extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (!prevProps.user.id) {
       const userId = this.props.user.id;
-      const API = `http://localhost:3001/users/${userId}/notes`;
+      const API = `http://localhost:3000/users/${userId}/notes`;
 
       fetch(API)
         .then((response) => response.json())
@@ -53,7 +53,7 @@ class Dashboard extends Component {
 
   
   handleDelete = (noteId) => {
-    const API = `http://localhost:3001/notes/${noteId}`;
+    const API = `http://localhost:3000/notes/${noteId}`;
     axios.delete(API).then((response) => console.log(response));
     this.props.deleteNote(noteId);
   };
@@ -61,7 +61,7 @@ class Dashboard extends Component {
   
   handleCompleted = (noteObj) => {
     const { id, title, description, completed } = noteObj;
-    const API = `http://localhost:3001/notes/${id}`;
+    const API = `http://localhost:3000/notes/${id}`;
 
     axios
       .patch(API, {
@@ -83,7 +83,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <NavBar
+        <Nav
           user={this.props.user}
           handleLogoutClick={this.handleLogoutClick}
           handleNewClick={this.handleNewClick}
@@ -125,6 +125,9 @@ const mapStateToProps = (state) => {
   return { notes: state.notes };
 };
 
-export default connect(mapStateToProps, { fetchNotes, deleteNote, markAsCompleted })(
-  Dashboard
-);
+export default connect(mapStateToProps, { 
+  fetchNotes, 
+  deleteNote, 
+  markCompleted 
+})
+(Dashboard);

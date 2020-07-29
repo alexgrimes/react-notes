@@ -5,6 +5,7 @@ import axios from 'axios';
 import { loginUser } from "../actions/loginUser";
 import { logoutUser } from "../actions/logoutUser";
 
+
 class App extends Component {
   constructor() {
     super();
@@ -21,7 +22,7 @@ class App extends Component {
 
   checkLoginStatus = () => {
     axios 
-      .get('http://localhost:3000/logged_in', { withCredentials: true })
+      .get('http://localhost:3000/', { withCredentials: true })
       .then((resp) => {
         if (
           resp.data.logged_in && this.props.loggedInStatus === "NOT_LOGGED_IN"
