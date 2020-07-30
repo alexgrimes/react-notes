@@ -31,7 +31,7 @@ class Registration extends Component {
       )
       .then((response) => {
         if (response.data.status === "created") {
-          this.props.handleSuccesfulAuth(response.data);
+          this.props.handleSuccessAuth(response.data);
         } else {
           this.setState({
             registrationErrors: response.data,

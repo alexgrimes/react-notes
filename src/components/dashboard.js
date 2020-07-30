@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 import { Typography, Button } from '@material-ui/core';
-
+import { currentUser } from '../reducers/auth'
 import NotesContainer from "./NotesContainer";
 import Nav from "./NewForm";
 import NewForm from "./NewForm";
@@ -13,7 +13,7 @@ import { deleteNote } from "../actions/deleteNote";
 import { markCompleted } from "../actions/markCompleted";
 
 
-class Dashboard extends Component {
+class Dashboard extends React.Component {
   
   handleLogoutClick = () => {
     axios
@@ -27,14 +27,24 @@ class Dashboard extends Component {
 
   
   componentDidMount() {
-    if (this.props.user.id) {
-      const userId = this.props.user.id;
-      const API = `http://localhost:3000/users/${userId}/notes`;
+    const token = localStorage.getItem('token')
 
-      fetch(API)
-        .then((response) => response.json())
-        .then((data) => this.props.fetchNotes(data.notes))
-        .catch((error) => console.log(error));
+    if (!token) {
+      this.props.history.push('/login')
+    } else {
+
+      const reqObj = {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      }
+      
+      fetch('http://localhost:3000/api/v1/current_user', reqObj)
+        .then(response => response.json())
+        .then(data => {
+          this.props.fetchNotes(data.notes)
+        })
     }
   }
 
@@ -123,9 +133,14 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => {
   return { notes: state.notes };
+  return { auth: state.auth }
 };
 
-export default connect(mapStateToProps, { 
+const mapDispatchToProps = {
+  currentUser
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, { 
   fetchNotes, 
   deleteNote, 
   markCompleted 

@@ -1,8 +1,9 @@
 import { combineReducers } from "redux";
 import notesReducer from "./notesReducer";
-import sessionsReducer from "./sessionsReducer";
+import sessionsReducer from "./auth";
 import usersReducer from "./usersReducer";
 import queryReducer from "./queryReducer";
+import auth from './auth'
 
 const rootReducer = combineReducers({
   notes: notesReducer,

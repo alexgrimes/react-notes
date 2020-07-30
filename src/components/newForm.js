@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { addNote } from "../actions/addNote";
-import { displaySuccessSnackbar } from "../actions/displaySuccessSnackbar";
 
 class NewForm extends Component {
   constructor() {
@@ -27,7 +26,7 @@ class NewForm extends Component {
     const { userId } = this.props;
     axios
       .post(
-        "http://localhost:3001/notes/new",
+        "http://localhost:3000/notes/new",
         {
           title: title,
           description: description,
@@ -39,7 +38,6 @@ class NewForm extends Component {
         if (response.data.status === "created") {
           this.props.addNote(response.data.note);
           this.props.history.push("/notes");
-          this.props.displaySuccessSnackbar();
         } else {
           console.log(response);
         }
@@ -58,11 +56,17 @@ class NewForm extends Component {
       <div>
         <Typography
           variant="h1"
-          style={{ marginTop: "100px", marginBottom: "20px", color: "#FFF" }}
+          style={{ 
+            marginTop: "50px",
+            marginBottom: "20px",
+            fontSize: "100px", 
+            color: "#FFF" }}
         >
-          Add a new note:
+          new note
         </Typography>
-        <FormGroup onSubmit={this.handleSubmit} style={{ textAlign: "center" }}>
+        <FormGroup 
+          onSubmit={this.handleSubmit} 
+          style={{ textAlign: "center" }}>
           <Input
             type="text"
             name="title"
@@ -70,13 +74,17 @@ class NewForm extends Component {
             value={this.state.title}
             onChange={this.handleChange}
             required
-            style={{ marginBottom: "10px", fontSize: "20px" }}
+            style={{ 
+              marginBottom: "10px", 
+              color: '#FFF',
+              fontSize: "20px" }}
           />
           <br />
 
           <Input
             style={{
-              backgroundColor: "#FFF",
+              backgroundColor: "rgb(250,250,250)",
+              opacity: 0.9,
               fontSize: "15px",
             }}
             multiline
@@ -109,4 +117,4 @@ class NewForm extends Component {
   }
 }
 
-export default connect(null, { addNote, displaySuccessSnackbar })(NewForm);
+export default connect(null, { addNote})(NewForm);

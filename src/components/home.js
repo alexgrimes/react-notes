@@ -35,13 +35,12 @@ class Home extends Component {
               marginRight: "10px",
             }}
           >
-            Notify •••
+            FlatNotice 
           </Typography>
 
           {this.state.showLogForm ? (
             <Login
               handleSuccessAuth={this.handleSuccessAuth}
-              displaySnackbar={this.props.displaySnackbar}
             />
           ) : null}
           {this.state.showRegForm ? (
