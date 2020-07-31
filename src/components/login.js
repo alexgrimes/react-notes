@@ -2,14 +2,15 @@ import React from "react";
 import { Button, Input, FormGroup } from "@material-ui/core";
 import { loginSuccess } from '../actions/auth';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 
 class Login extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      name: "",
-      password: ""
+      name: "alex",
+      password: "password"
     };
   }
 
@@ -25,13 +26,15 @@ class Login extends React.Component {
     fetch('http://localhost:3001/api/v1/auth', reqObj)
     .then(resp => resp.json())
     .then(data => {
-      console.log(data)
+      console.log(data, '----authdata')
       if (data.error) {
         alert(data.error)
       } else {
         console.log(data)
         localStorage.setItem('token', data.token)
         this.props.loginSuccess(data)
+        console.log(this.state, 'this.state')
+        console.log(this.props.loginSuccess, 'this.props')
         this.props.history.push('/dashboard')
       }
     })
@@ -44,6 +47,7 @@ class Login extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <FormGroup 
@@ -88,7 +92,7 @@ class Login extends React.Component {
             }}
             onClick={this.handleSubmit}
           >
-            Sign In!
+            Sign In
           </Button>
 
         
@@ -98,8 +102,17 @@ class Login extends React.Component {
   }
 }
 
+// const mapDispatchToProps = dispatch => {
+//   return { 
+//     loginSuccess: (user) => dispatch({
+//       type: 'LOGIN_SUCCESS', 
+//       user 
+//     }) 
+//   }
+// }
+
 const mapDispatchToProps = {
   loginSuccess
 }
 
-export default connect(null, mapDispatchToProps) (Login);
+export default connect(null, mapDispatchToProps)(Login);

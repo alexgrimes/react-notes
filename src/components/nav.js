@@ -44,7 +44,14 @@ class Nav extends React.Component {
           Log out
         </Link>
         :
-        <Link to='/login' className="ui button">
+        <Link to='/login' 
+        className="ui button"
+        style={{
+            fontSize: '15px',
+            marginRight: '10px',
+            color: '#FFF'
+          }}
+          >
           Login 
         </Link>
       }

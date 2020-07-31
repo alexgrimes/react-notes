@@ -3,9 +3,9 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 import { Typography, Button } from '@material-ui/core';
-import { currentUser } from '../reducers/auth'
+import { currentUser } from '../actions/auth'
 import NotesContainer from "./NotesContainer";
-import Nav from "./NewForm";
+import Nav from "./nav";
 import NewForm from "./NewForm";
 import EditForm from "./EditForm";
 import { fetchNotes } from "../actions/fetchNotes";
@@ -99,45 +99,60 @@ class Dashboard extends React.Component {
           handleNewClick={this.handleNewClick}
         />
 
-        <Route
+        {/* <Route
           exact
           path={"/notes"}
-          render={(routerProps) => (
+          render={(routerProps) => ( */}
             <NotesContainer
-              {...routerProps}
+              // {...routerProps}
               handleDelete={this.handleDelete}
               handleCompleted={this.handleCompleted}
             />
-          )}
-        />
+          {/* )}
+        /> */}
 
-        <Route
+        {/* <Route
           exact
           path={"/notes/new"}
-          render={(routerProps) => (
-            <NewForm {...routerProps} userId={this.props.user.id} />
-          )}
-        />
+          render={(routerProps) => ( */}
+            <NewForm 
+            // {...routerProps} 
+            userId={this.props.user.id} 
+            />
+          {/* )}
+        /> */}
 
-        <Route
+        {/* <Route
           exact
           path={"/notes/:noteId/edit"}
-          render={(routerProps) => (
-            <EditForm {...routerProps} userId={this.props.user.id} />
-          )}
-        />
+          render={(routerProps) => ( */}
+            <EditForm 
+              // {...routerProps} 
+              userId={this.props.user.id} 
+            />
+          {/* )}
+        /> */}
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { notes: state.notes };
-  return { auth: state.auth }
+  return { 
+    notes: state.notes,
+    auth: state.auth 
+  };
+
 };
 
-const mapDispatchToProps = {
-  currentUser
+const mapDispatchToProps = dispatch => {
+  return{
+    currentUser: (user) => dispatch({
+      type: 'CURRENT_USER',
+      user
+    })
+  }
+  
 }
 
 export default connect(mapStateToProps, mapDispatchToProps, { 

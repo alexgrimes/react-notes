@@ -8,6 +8,9 @@ import Login from './Login';
 import Dashboard from './Dashboard'
 import Home from './home'
 import Nav from './nav'
+import NotesContainer from './NotesContainer'
+import EditForm from './EditForm'
+import NewForm from './NewForm'
 
 
 const App = () => {
@@ -16,9 +19,13 @@ const App = () => {
     <Router>
       <div className="App">
         <Nav />
+        <Home />
         <Switch>
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/login' component={Login} />
+          <Route path='/notes' component={NotesContainer} />
+          <Route path='/notes/new' component={NewForm} />
+          <Route path='/notes/:noteId/edit' component={EditForm} />
         </Switch>
       </div>
     </Router>

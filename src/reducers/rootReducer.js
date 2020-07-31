@@ -1,13 +1,12 @@
 import { combineReducers } from "redux";
 import notesReducer from "./notesReducer";
-import sessionsReducer from "./auth";
 import usersReducer from "./usersReducer";
 import queryReducer from "./queryReducer";
-import auth from './auth'
+import authReducer from './authReducer'
 
 const rootReducer = combineReducers({
   notes: notesReducer,
-  loggedInStatus: sessionsReducer,
+  loggedInStatus: authReducer,
   user: usersReducer,
   query: queryReducer,
 });

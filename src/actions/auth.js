@@ -1,11 +1,11 @@
-export const loginSuccess = (user) => {
+export const loginSuccess = user => {
   return {
-    type: "LOGIN_SUCCESS",
+    type: 'LOGIN_SUCCESS',
     user
   };
 }
 
-export const currentUser = user => {
+export const currentUser = (user) => {
   return {
     type: 'CURRENT_USER',
     user

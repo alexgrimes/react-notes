@@ -13,15 +13,15 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 
-function main() {
-  ReactDOM.render(
-    <Provider store={store}>
-       <BrowserRouter>
-         <App />
-       </BrowserRouter>
-     </Provider>,
-    document.querySelector("#root")
-  );
-}
 
-document.addEventListener("DOMContentLoaded", main);
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <App/>
+    </BrowserRouter>
+  </Provider>,
+    document.querySelector("#root")
+);
+
+
+

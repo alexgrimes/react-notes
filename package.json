@@ -19,6 +19,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "bootstrap": "^4.5.0",
+    "browser-router": "^0.2.0",
     "clean-webpack-plugin": "^0.1.16",
     "clsx": "^1.1.1",
     "copy-webpack-plugin": "^4.5.2",
